@@ -26,18 +26,20 @@ class DatasetDownloader:
             pool.map(self.download_apk, self.dataset)
 
     def download_apk(self, apk):
-        apk_save_path = os.path.join(self.out_dir, apk.pkg_name) + '.apk'
+        #apk_save_path = os.path.join(self.out_dir, apk.pkg_name) + '.apk'
+        apk_save_path = os.path.join(self.out_dir, apk.sha256) + '.apk'
         try:
-            if os.path.exists(apk_save_path):
-                apk_save_path = apk_save_path.replace('.apk', f'{apk.sha1}.apk')
-                logging.warning(f'apk with pkg {apk.pkg_name} already exists, saving by {apk_save_path}')
-            logging.debug(f'DOWNLOAD {apk.pkg_name}... ')
+            #if os.path.exists(apk_save_path):
+            #    apk_save_path = apk_save_path.replace('.apk', f'{apk.sha1}.apk')
+            #    logging.warning(f'apk with pkg {apk.pkg_name} already exists, saving by {apk_save_path}')
+            logging.debug(f'DOWNLOAD {apk.sha256}... ')
             apk_url = self.url_constructor.construct(apk)
             response = requests.get(apk_url)
             with open(apk_save_path, 'wb') as out_file:
                 code = response.status_code
                 if code != 200:
-                    logging.warning(f'HTTP code for {apk.pkg_name} is {code}')
+                    logging.warning(f'HTTP code for {apk.sha256} is {code}')
+                    
                 out_file.write(response.content)
         except:
-            logging.error(f'Unexpected error while downloading {apk.pkg_name}: {sys.exc_info()[1]}')
+            logging.error(f'Unexpected error while downloading {apk.sha256}: {sys.exc_info()[1]}')
