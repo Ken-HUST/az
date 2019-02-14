@@ -1,3 +1,4 @@
+The project is forked from https://github.com/ArtemKushnerov/az.
 Downloads specified number of **randomly chosen** apks satisfying specified criteria from androzoo repository.  
 Saves specified metadata to *metadata.csv*. dexdate, apksize and vtdetection require specifying lower and upper bounds in format lower:upper, both inclusive.  
 One of the bounds can be omitted (i.e. you can write :upper or lower:)  
@@ -10,7 +11,7 @@ Allows downloading in the multiple threads.
 
 ### INSTALLATION
 
-1. `pip install git+https://github.com/ArtemKushnerov/az.git@v1.2.2#egg=az`
+1. `pip3 install git+https://github.com/Ken-HUST/az.git@v1.2.2#egg=az`
 
 2. create *.az* file in your home directory (~ on Linux 
 and macOS, C:\Users\%USERNAME% on Windows) or in the directory where you want to invoke `az` from with the following contents:  
